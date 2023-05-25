@@ -54,6 +54,7 @@ This is also evident from the Heatmap below
 Machine learning models 
 Tested two models: Decision Trees and Random forests (Random forests best option) 
 Unbalanced data corrected with SMOTEENN class, which is a combination of the Synthetic Minority Over-sampling Technique (SMOTE) and Edited Nearest Neighbors (ENN) which increased accuracy of model from 78% to 92% with lower false positives and negatives for class 1. 
+
 Conclusion 
  Electronic check medium are the highest churners
  Contract Type - Monthly customers are more likely to churn because of no contract terms, as they are free to go customers.
