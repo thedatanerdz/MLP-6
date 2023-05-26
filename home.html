@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Churn Prediction</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="text-center mt-5">Customer Churn Prediction</h1>
+    <hr>
+
+    <form action="{{ url_for('predict') }}" method="POST">
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select class="form-control" id="gender" name="gender">
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="senior_citizen">Senior Citizen:</label>
+        <select class="form-control" id="senior_citizen" name="senior_citizen">
+          <option value="0">No</option>
+          <option value="1">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="partner">Partner:</label>
+        <select class="form-control" id="partner" name="partner">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="dependents">Dependents:</label>
+        <select class="form-control" id="dependents" name="dependents">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="tenure">Tenure (months):</label>
+        <input type="number" class="form-control" id="tenure" name="tenure" required>
+      </div>
+
+      <div class="form-group">
+        <label for="phone_service">Phone Service:</label>
+        <select class="form-control" id="phone_service" name="phone_service">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="multiple_lines">Multiple Lines:</label>
+        <select class="form-control" id="multiple_lines" name="multiple_lines">
+          <option value="No">No</option>
+          <option value="Yes">Yes</option>
+          <option value="No phone service">No phone service</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="internet_service">Internet Service:</label>
+        <select class="form-control" id="internet_service" name="internet_service">
+          <option value="No">No</option>
+          <option value="DSL">DSL</option>
+          <option value="Fiber optic">Fiber optic</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="online_security">Online Security:</label>
+        <select class="form-control" id="online_security" name="online_security">
+         
+			<option value="No">No</option>
+			<option value="Yes">Yes</option>
+			<option value="No internet service">No internet service</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="online_backup">Online Backup:</label>
+		  <select class="form-control" id="online_backup" name="online_backup">
+			<option value="No">No</option>
+			<option value="Yes">Yes</option>
+			<option value="No internet service">No internet service</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="device_protection">Device Protection:</label>
+		  <select class="form-control" id="device_protection" name="device_protection">
+			<option value="No">No</option>
+			<option value="Yes">Yes</option>
+			<option value="No internet service">No internet service</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="tech_support">Tech Support:</label>
+		  <select class="form-control" id="tech_support" name="tech_support">
+			<option value="No">No</option>
+			<option value="Yes">Yes</option>
+			<option value="No internet service">No internet service</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="streaming_tv">Streaming TV:</label>
+		  <select class="form-control" id="streaming_tv" name="streaming_tv">
+			<option value="No">No</option>
+			<option value="Yes">Yes</option>
+			<option value="No internet service">No internet service</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="streaming_movies">Streaming Movies:</label>
+		  <select class="form-control" id="streaming_movies" name="streaming_movies">
+			<option value="No">No</option>
+			<option value="Yes">Yes</option>
+			<option value="No internet service">No internet service</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="contract">Contract:</label>
+		  <select class="form-control" id="contract" name="contract">
+			<option value="Month-to-month">Month-to-month</option>
+			<option value="One year">One year</option>
+			<option value="Two year">Two year</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="paperless_billing">Paperless Billing:</label>
+		  <select class="form-control" id="paperless_billing" name="paperless_billing">
+			<option value="No">No</option>
+			<option value="Yes">Yes</option>
+		  </select>
+		</div>
+  
+		<div class="form-group">
+		  <label for="payment_method">Payment Method:</label>
+		  <select class="form-control" id="payment_method" name="payment_method">
+			<option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+			<option value="Credit card (automatic)">Credit card (automatic)</option>
+			<option value="Electronic check">Electronic check</option>
+			<option value="Mailed check">Mailed check</option>
+		  </select>
+		</div>
+  
+		<button type="submit" class="btn btn-primary">Predict Churn</button>
+	  </form>
+   
+    </div>
+
+    {% if churn_prediction %}
+    <div class="container mt-5">
+      <h3 class="text-center">Churn Prediction Result:</h3>
+      <hr>
+      <div class="row justify-content-center">
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Churn Probability:</h5>
+              <p class="card-text">{{ churn_prediction.probability }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Churn Prediction:</h5>
+              <p class="card-text">{{ churn_prediction.prediction }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+  
