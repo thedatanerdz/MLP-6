@@ -4,7 +4,7 @@ Industry
 Telecommunications 
 
 Skills
-Python | HTML | CSS | FLASK | Machine Learning algorithms | Machine Learning deployment | web development | EDA | Deep learning | Customer churn | Customer analysis
+Python | Streamlit | Machine Learning algorithms | Machine Learning deployment | web development | EDA | Deep learning | Customer churn | Customer analysis
 
 Problem statements
 Build a front end application with an easy to use UI that allows you to predict customer churn rate. 
